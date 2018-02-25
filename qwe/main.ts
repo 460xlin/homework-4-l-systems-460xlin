@@ -4,12 +4,10 @@ import * as DAT from 'dat-gui';
 import Icosphere from './geometry/Icosphere';
 import Square from './geometry/Square';
 import Cube from './geometry/Cube';
-import myObj from './geometry/ObjFile'
 import OpenGLRenderer from './rendering/gl/OpenGLRenderer';
 import Camera from './Camera';
 import {setGL} from './globals';
 import ShaderProgram, {Shader} from './rendering/gl/ShaderProgram';
-import Lsystem from './lsystem';
 
 // Define an object with application parameters and button callbacks
 // This will be referred to by dat.GUI's functions that add GUI elements.
@@ -31,7 +29,6 @@ const controls = {
 let icosphere: Icosphere;
 let square: Square;
 let cube: Cube;
-let myObj1: myObj;
 let thisShader: ShaderProgram;
 let lambert: ShaderProgram;
 let customShader: ShaderProgram;
@@ -68,9 +65,6 @@ function loadScene() {
   square.create();
   cube = new Cube(vec3.fromValues(0, 0, 0));
   cube.create();
-  myObj1 = new myObj();
-  myObj1.create();
-  
   mTime = 0;
   openPlanet = false;
 }
@@ -183,7 +177,7 @@ function main() {
     }
     else{
       renderer.render(camera, thisShader, [
-        myObj1,
+        icosphere,
         //cube,
       ], cl, mTime, mRadius, mTerH, mCloudS, mCloudD);
     }
